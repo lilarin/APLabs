@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated />
+  </component>
+  <component name="CMakeSettings" AUTO_RELOAD="true">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3531c639-5c9e-45a3-8962-94e816efef0e" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
+  </component>
+  <component name="ProjectId" id="28Kz1GTWXyIixhFUD9UJ4n4T5af" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="cmake.loaded.for.project" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/main.cpp" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3531c639-5c9e-45a3-8962-94e816efef0e" name="Changes" comment="" />
+      <created>1650979848842</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1650979848842</updated>
+      <workItem from="1650979850565" duration="597000" />
+      <workItem from="1650981132583" duration="555000" />
+      <workItem from="1650981720326" duration="6331000" />
+      <workItem from="1651055776118" duration="9716000" />
+      <workItem from="1651067241134" duration="23323000" />
+      <workItem from="1651092645394" duration="75000" />
+      <workItem from="1651138553198" duration="7182000" />
+      <workItem from="1651160558118" duration="3520000" />
+      <workItem from="1651170795291" duration="4587000" />
+      <workItem from="1651177255753" duration="1000" />
+      <workItem from="1651177308209" duration="19722000" />
+      <workItem from="1651237273207" duration="42000" />
+      <workItem from="1651237459205" duration="37000" />
+      <workItem from="1651237539799" duration="3335000" />
+      <workItem from="1651241481007" duration="6370000" />
+      <workItem from="1651314398737" duration="6296000" />
+      <workItem from="1651321093786" duration="14533000" />
+      <workItem from="1651337599397" duration="51000" />
+      <workItem from="1651337704823" duration="244000" />
+      <workItem from="1651338704772" duration="91000" />
+      <workItem from="1651341467711" duration="37000" />
+      <workItem from="1651343028065" duration="7915000" />
+      <workItem from="1651351811486" duration="1783000" />
+      <workItem from="1651353666646" duration="3784000" />
+      <workItem from="1651357856129" duration="2285000" />
+      <workItem from="1651391522160" duration="27869000" />
+      <workItem from="1651568569633" duration="6000" />
+      <workItem from="1651568589885" duration="24874000" />
+      <workItem from="1651657127548" duration="6872000" />
+      <workItem from="1651670080896" duration="2695000" />
+      <workItem from="1651674538550" duration="1000" />
+      <workItem from="1651675526531" duration="2197000" />
+      <workItem from="1651678513744" duration="1000" />
+      <workItem from="1651678625370" duration="7276000" />
+      <workItem from="1651745820024" duration="632000" />
+      <workItem from="1651767816338" duration="8063000" />
+      <workItem from="1651777380359" duration="964000" />
+      <workItem from="1651787617902" duration="3845000" />
+      <workItem from="1651830212426" duration="471000" />
+      <workItem from="1651839673853" duration="261000" />
+      <workItem from="1652033359931" duration="293000" />
+      <workItem from="1652273788688" duration="599000" />
+      <workItem from="1652940282097" duration="483000" />
+      <workItem from="1653229994796" duration="2000" />
+      <workItem from="1653230028695" duration="49000" />
+      <workItem from="1653242099136" duration="26000" />
+      <workItem from="1653242153403" duration="4000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
