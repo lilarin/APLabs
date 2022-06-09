@@ -1,3 +1,0 @@
-C:/Users/User/Desktop/C/Shunting-Yard algorithm/cmake-build-debug/CMakeFiles/Shunting_Yard_algorithm.dir
-C:/Users/User/Desktop/C/Shunting-Yard algorithm/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/User/Desktop/C/Shunting-Yard algorithm/cmake-build-debug/CMakeFiles/rebuild_cache.dir

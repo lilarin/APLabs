@@ -12,14 +12,14 @@ void readFile (const char* fileH);
 
 int main()
 {
-    srand(time(nullptr));           // в ц?й робот?, нав?дм?ну
-    const char* fileG = "../G.txt"; // в?д попередн?х я вир?шив
+    srand(time(nullptr));           // в цiй роботi, навiдмiну
+    const char* fileG = "../G.txt"; // вiд попереднiх я вирiшив
     const char* fileF = "../F.txt"; // одразу визначити назву та
     const char* fileH = "../H.txt"; // розширення файлу
     createAndFill_File(fileG);
     createAndFill_File(fileF);  // Створюю два файли та заповнюю їх
-    createEmptyFile(fileH);  // Створюю порожн?й файл, куди буду записувати значення
-    searchForLetters(fileG,fileF,fileH); // Шукаю зб?жност? та записую їх у новий файл
+    createEmptyFile(fileH);  // Створюю порожнiй файл, куди буду записувати значення
+    searchForLetters(fileG,fileF,fileH); // Шукаю збiжностi та записую їх у новий файл
     readFile(fileH); // читаю вм?ст нового файлу
 
     return 1;
@@ -53,8 +53,8 @@ void createEmptyFile(const char* filename)
 
 void searchForLetters(const char* fileG,const char* fileF,const char* fileH)
 {
-    ofstream fout(fileH); // в?дкриваю файл для запису
-    ifstream finG(fileG); // в?дкриваю файли для читання
+    ofstream fout(fileH); // вiдкриваю файл для запису
+    ifstream finG(fileG); // вiдкриваю файли для читання
     ifstream finF(fileF);
     char g[10],f[10];
     int counter=0;
@@ -66,7 +66,7 @@ void searchForLetters(const char* fileG,const char* fileF,const char* fileH)
             fout << g[0] << "(" << counter << ") ";
         }
     }
-    fout.close(); // закриваю вс? файли
+    fout.close(); // закриваю всi файли
     finG.close();
     finF.close();
 }

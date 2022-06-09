@@ -1,224 +1,187 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
-#include <string>
-#include <sstream>
-#include <iostream>
-#include "shunting_yard.h"
+#include "view.h"
+#include "textbox.h"
+#include "vector"
+#include "sstream"
 
-using namespace std;
-using namespace sf;
-
-string intToString(double number) {
-    stringstream ss;             //create a stringstream
-    string str;
-    ss << number;                //add number to the stream
-    ss >> str;                   //push the contents onto a string
-    return str;                  //return the string
+int returnHeight(int height) {
+    return height;
 }
-
+int returnWidth(int width) {
+    return width;
+}
+int returnSizeX(int width) {
+    return width/2;
+}
+int returnSizeY(int height) {
+    return height/2;
+}
+string intToString(double number) {
+    stringstream ss;
+    string str;
+    ss << number;
+    ss >> str;
+    return str;
+}
 
 int main()
 {
-        string equation = "100000";
 
-        float width = 1280, height = 720, renderWidth = 1280, renderHeight = 720, xOriginal = 0, yOriginal = 0,
-        CenterX = (width/2), CenterY = (height/2);
-        double Scaler = 10, PanX = 0, PanY = 0;
-
-
-        bool hold = false;
-
-
-        RenderWindow window;
-        if (!window.isOpen()) {
-            window.create(sf::VideoMode(renderWidth,renderHeight), "Graph plotter", Style::Close);
-        }
-
-        window.setFramerateLimit(60);
-
-        ContextSettings settings;
-        settings.antialiasingLevel = 8;
+    int x,y;
+    bool hold;
+    double equation,zoomCounter=0,Scaler = 32, widthness;
+    float leftBorder = -1000, rightBorder = 1000,width = 1280,height = 720;
+    float CenterX = width/2, CenterY = height/2;
+    unsigned long long range = sqrt(leftBorder * leftBorder) + sqrt(rightBorder * rightBorder);
 
 
-        Font font;
-        font.loadFromFile("C:/arial.ttf");
+    RenderWindow window;
+    window.create(sf::VideoMode(width,), "Graphing Calculator");   
+    window.setFramerateLimit(60);
+    View view(window.getDefaultView());
+    view.reset(FloatRect(0, 0, window.getSize().x, window.getSize().y));
+    const float zoomAmount{ 1.1f }; // zoom by 10%
 
-        Text text;
-        text.setFont(font);
-        text.setCharacterSize(24);
 
 
-        while (window.isOpen())
+    ContextSettings settings;
+    settings.antialiasingLevel = 8;
+
+    Font font;
+    font.loadFromFile("C:/arial.ttf");
+    Textbox textbox1(16,Color::White, true);
+    textbox1.setFont(font);
+    textbox1.setPosition({100,100});
+
+    //init a font
+    font.loadFromFile("C:/arial.ttf");
+    Text text;
+    text.setFont(font);
+    text.setColor(sf::Color::White);
+
+    while (window.isOpen())
+    {
+        Event event;
+        while (window.pollEvent(event))
         {
-            Event event;
-            while (window.pollEvent(event))
-            {
-                switch (event.type) {
-    //                case Event::MouseLeft:
-    //                    button1.setColor(sf::Color(255, 255, 255));
-    //                    button2.setColor(sf::Color(255, 255, 255));
-                    case Event::Closed:
-                        window.close();
-                        break;
-                    case Event::MouseWheelMoved:            //will check for mouse scrolling
-                        if(Scaler == 1 && event.mouseWheel.delta <=-1)      //will not allow Scaler to become 0
-                            Scaler = -1;
-                        else if(Scaler == -1 && event.mouseWheel.delta >=1) //will not allow Scaler to become 0
-                            Scaler = 1;
-                        if(event.mouseWheel.delta<0)
-                            Scaler-=Scaler*0.1;
-                        if(event.mouseWheel.delta>0)
-                            Scaler+=Scaler*0.1;
-                        break;
-                    case::Event::KeyPressed:
-                        if (event.key.code == Keyboard::Escape) {
-                            Scaler = 10;
-                            CenterX = width/2;
-                            CenterY = height/2;
+            switch (event.type) {
+                case Event::Closed:
+                    window.close();
+                    break;
+                case Event::MouseWheelScrolled:
+                    if (event.mouseWheelScroll.delta > 0) {
+                        if (zoomCounter < 32) {
+                            zoomView({event.mouseWheelScroll.x, event.mouseWheelScroll.y}, window, (1.f / zoomAmount));
+                            zoomCounter++;
                         }
-                    case Event::MouseButtonPressed:
-                        if (event.mouseButton.button == Mouse::Right) {
-                            xOriginal = event.mouseButton.x;
-                            yOriginal = event.mouseButton.y;
-                            hold = true;
+                    }
+                    else if (event.mouseWheelScroll.delta < 0)
+                        if (zoomCounter > 0) {
+                            zoomCounter--;
+                            zoomView({ event.mouseWheelScroll.x, event.mouseWheelScroll.y }, window, zoomAmount);
                         }
-                        break;
-                        {case Event::MouseMoved:
-                            if(hold) {
-                                PanX = event.mouseMove.x - xOriginal;
-                                PanY = event.mouseMove.y - yOriginal;
-                                CenterX+=PanX;
-                                CenterY+=PanY;
-                                xOriginal = event.mouseMove.x;
-                                yOriginal = event.mouseMove.y;
-                            }
-                            break;}
-                    case Event::MouseButtonReleased:
-                        if (event.mouseButton.button == Mouse::Right) hold = false;
-                        break;
-                }
-            }
+                case::Event::KeyPressed:
+                    if (event.key.code == sf::Keyboard::Enter) {
+                        string str = textbox1.getText();
 
-            window.clear(Color::Black);
+                        equation = stod(str);
 
-            font.loadFromFile("C:/arial.ttf");
-            Text dimension;
-            dimension.setFont(font);
-            dimension.setColor(sf::Color::White);
-
-            double FScaler = Scaler;
-            while(width/FScaler > 20) {
-                FScaler *= 2;
+                    }
+                    else if (event.key.code == sf::Keyboard::Escape) {
+                        view = window.getDefaultView();
+                        window.setView(view);
+                    }
+                case Event::MouseMoved:
+//                    std::cout << "mouse x,y: " << returnHeight(event.size.width) - returnSizeX(window.getSize().x)
+//                    << " " << returnWidth(event.size.height) - returnSizeY(window.getSize().y) << std::endl;
+                    break;
+                case Event::TextEntered:
+                    textbox1.typedOn(event);
+                case Event::Resized:
+                    FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+                    window.setView(sf::View(visibleArea));
+                    view = window.getDefaultView();
+                    window.setView(view);
+                    zoomCounter = 0;
             }
-
-
-            VertexArray Line(LinesStrip, 2);
-            Line[0].color = {255, 255, 255};
-            Line[1].color = {255, 255, 255};
-            text.setFillColor({255, 255, 255});
-
-            Line[0].position = Vector2f(CenterX, (0));                    //creates the y axis
-            Line[1].position = Vector2f(CenterX, (height));                 // ''
-            window.draw(Line);                                             //draws the y axis
-            Line[0].position = Vector2f((0), CenterY);                    //creates the x axis
-            Line[1].position = Vector2f((width), CenterY);                 //''
-            window.draw(Line);
-
-
-            double lastPositive = (width/2+(-1*(CenterX-width/2)))/Scaler,lastNegative = (-width/2+(-1*(CenterX-width/2)))/Scaler;
-            for(double i = 0; i<=width/2+(-1*(CenterX-width/2)); i+=FScaler)    //creates the Positive X numbers on the grid
-            {
-                text.setString(intToString(i/Scaler));
-                text.setPosition((i+CenterX),CenterY);
-                window.draw(text);
-            }
-            for(double i = 0; i>=-width/2+(-1*(CenterX-width/2)); i-=FScaler)     //creates the Negative X numbers on the grid
-            {
-                text.setString(intToString(i/Scaler));
-                text.setPosition((i+CenterX),CenterY);
-                window.draw(text);
-            }
-            for(double i = 0; i<=height/2+(CenterY-height/2); i+=FScaler)           //creates the Positive Y numbers on the grid
-            {
-                text.setString(intToString(i/Scaler));
-                text.setPosition(CenterX,CenterY-i);
-                window.draw(text);
-            }
-            for(double i = 0; i>=-height/2+(CenterY-height/2); i-=FScaler)          //creates the Negative Y numbers on the grid
-            {
-                text.setString(intToString(i/Scaler));
-                text.setPosition(CenterX,CenterY-i);
-                window.draw(text);
-            }
-
-            for(double i = 0; i <= width/2+(CenterX-width/2); i+=FScaler)                          //creates the lines by the numbers Negative X grid
-            {
-                Line[0].position = Vector2f(CenterX-i, CenterY-(10));
-                Line[1].position = Vector2f(CenterX-i, CenterY+(10));
-                window.draw(Line);
-            }
-            for(double i = 0; i <= width/2+(-1*(CenterX-width/2)); i+=FScaler)                          //creates the lines by the numbers Positive X grid
-            {
-                Line[0].position = Vector2f(CenterX+i, CenterY-(10));
-                Line[1].position = Vector2f(CenterX+i, CenterY+(10));
-                window.draw(Line);
-            }
-            for(double i = 0; i <= height/2+(-1*(CenterY-height/2)); i+=FScaler)                          //creates the lines by the numbers
-            {
-                Line[0].position = Vector2f(CenterX-(10),CenterY+i);
-                Line[1].position = Vector2f(CenterX+(10),CenterY+i);
-                window.draw(Line);
-            }
-            for(double i = 0; i <= height/2+((CenterY-height/2)); i+=FScaler)                          //creates the lines by the numbers
-            {
-                Line[0].position = Vector2f(CenterX-(10),CenterY-i);
-                Line[1].position = Vector2f(CenterX+(10),CenterY-i);
-                window.draw(Line);
-            }
-
-            Line[0].color = {50, 50, 50};
-            Line[1].color = {50, 50, 50};
-            for(double i = 1; i <= width/2+(CenterX-width/2); i+=FScaler)                          //creates the lines by the numbers Negative X grid
-            {
-                Line[0].position = Vector2f(CenterX-i, 0);
-                Line[1].position = Vector2f(CenterX-i, height);
-                window.draw(Line);
-            }
-            for(double i = 1; i <= width/2+(-1*(CenterX-width/2)); i+=FScaler)                          //creates the lines by the numbers Positive X grid
-            {
-                Line[0].position = Vector2f(CenterX+i, 0);
-                Line[1].position = Vector2f(CenterX+i, height);
-                window.draw(Line);
-            }
-            for(double i = 1; i <= height/2+(-1*(CenterY-height/2)); i+=FScaler)                          //creates the lines by the numbers
-            {
-                Line[0].position = Vector2f(0,CenterY+i);
-                Line[1].position = Vector2f(width,CenterY+i);
-                window.draw(Line);
-            }
-            for(double i = 1; i <= height/2+((CenterY-height/2)); i+=FScaler)                          //creates the lines by the numbers
-            {
-                Line[0].position = Vector2f(0,CenterY-i);
-                Line[1].position = Vector2f(width,CenterY-i);
-                window.draw(Line);
-            }
-
-
-            Line[0].color = {75, 251, 75};
-            Line[1].color = {75, 251, 75};
-
-            for(double x = -20; x < 20; x += 1/Scaler)                  //draws the graph in increments of 0.1
-            {
-                ShuntingYard::variables["x"] = x;
-                ShuntingYard::RPN rpn = ShuntingYard::reversePolishNotation(equation.c_str());
-                ShuntingYard::Node* tree = ShuntingYard::parse(rpn);
-                Line[0].position = sf::Vector2f((x*Scaler+CenterX),(eval(tree)*Scaler*-1+CenterY));
-                ShuntingYard::variables["x"] = x+1/Scaler;
-                Line[1].position = sf::Vector2f(((x+1/Scaler)*Scaler+CenterX),(eval(tree)*Scaler*-1+CenterY));
-                window.draw(Line);
-            }
-
-            window.display();
-            //displays everything drawn
         }
+
+        window.clear(Color(Color::Black));
+
+        VertexArray Line(LinesStrip, 2);
+        Line[0].position = Vector2f(width/2, (0));
+        Line[1].position = Vector2f(width/2, (height));
+        window.draw(Line);
+        Line[0].position = Vector2f((0), height/2);
+        Line[1].position = Vector2f((width), height/2);
+        window.draw(Line);
+
+
+        font.loadFromFile("C:/arial.ttf");
+        Text dimension;
+        dimension.setFont(font);
+        dimension.setColor(sf::Color::White);
+
+
+        Scaler = 32, widthness = 8;
+        if (zoomCounter >= 4 && zoomCounter < 16)  Scaler = 16, widthness = 4;
+        if (zoomCounter >= 8 && zoomCounter < 16) Scaler = 8, widthness = 2;
+        if (zoomCounter >= 16 && zoomCounter < 24) Scaler = 4, widthness = 1;
+        if (zoomCounter >= 24) Scaler = 2, widthness = 0.5;
+
+
+        for(float i = 0; i <= width/2; i+=Scaler) {
+            Line[0].position = sf::Vector2f(width/2-i, height/2-(widthness));
+            Line[1].position = sf::Vector2f(width/2-i, height/2+(widthness));
+            window.draw(Line);
+        }
+        for(float i = 0; i <= width/2; i+=Scaler) {
+            Line[0].position = sf::Vector2f(width/2+i, height/2-(widthness));
+            Line[1].position = sf::Vector2f(width/2+i, height/2+(widthness));
+            window.draw(Line);
+        }
+        for(float i = 0; i <= width/2; i+=Scaler) {
+            Line[0].position = sf::Vector2f(width/2-(widthness), height/2-i);
+            Line[1].position = sf::Vector2f(width/2+(widthness), height/2-i);
+            window.draw(Line);
+        }
+        for(float i = 0; i <= width/2; i+=Scaler) {
+            Line[0].position = sf::Vector2f(width/2-(widthness), height/2+i);
+            Line[1].position = sf::Vector2f(width/2+(widthness), height/2+i);
+            window.draw(Line);
+        }
+
+
+        size_t i = 0;
+        VertexArray curve(LineStrip, 2);
+        for (float x = leftBorder; x < rightBorder; x+= 0.01f) {
+            float testEquation = pow(0.5,x)-(x-2)*(x-2)+1;
+//            curve[i].position = Vector2f(x*x-height/2,x+width/2);
+            curve.append(Vertex(Vector2f(x*x-height/2,x+width/2)));
+            curve[i].color = {75, 251, 75};
+            i++;
+        }
+
+        i = 0;
+        sf::Transform rotation;
+        rotation.rotate(270);
+        window.draw(curve, rotation);
+        textbox1.drawTo(window);
+
+
+        std::ostringstream playerScoreString;
+        playerScoreString << Scaler;
+        text.setString("Rozmirnist: " + playerScoreString.str());
+        const Vector2f Coord{ window.mapPixelToCoords({static_cast<int>(window.getPosition().x-(width/5)),window.getPosition().y}) };
+        text.setCharacterSize((width/height*5));
+        text.move(Coord);
+        text.setPosition(Coord);
+        window.draw(text);
+
+
+        window.display();
+    }
+
+    return EXIT_SUCCESS;
 }

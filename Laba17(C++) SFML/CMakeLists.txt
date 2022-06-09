@@ -3,7 +3,7 @@ project(Laba17_C____SFML)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Laba17_C____SFML main.cpp shunting_yard.h)
+add_executable(Laba17_C____SFML main.cpp textbox.h button.h)
 
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR C:/SFML/lib/cmake/SFML)

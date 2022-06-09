@@ -1,48 +1,37 @@
 #include <iostream>
 #include <cstdarg>
 
+#define INPUT_NUMBERS( A, B, C, D, E ) {     \
+int counter = 0;                             \
+double input;                                \
+cout << "Type 5 elements:" << endl;          \
+cin >> A >> B >> C >> D >> E;                \
+counter++;                                   \
+}                                            \
+cout << "Typed elements are: ";              \
+cout << A << ", " << B << ", " << C          \
+<< ", " << D << ", " << E << endl;           \
+
+#define PRINT_SUM( SUM ) {                   \
+cout << "Sum of numbers is: " << SUM << endl;\
+}
+
 using namespace std;
 
-double getsum (int count, ...)
-{
-    va_list args; // Вiдкриваю список параметр?в
-    va_start (args, count); // Встановлюю вказiвник args та кажу розмiр масиву
-
-    double sum = 0;
-    double *num;
-
-    num = va_arg(args, double*); // передаю N значень з макроса
-    for (int i = 0; i < count; i++) {
-        sum += num[i];
+double getSum (int size, double first, ...) {
+    double sum = 0, i = first;
+    va_list marker;
+    va_start( marker, first );
+    for ( int counter = 0; counter < size; counter++ ) {
+        sum += i;
+        i = va_arg( marker, double);
     }
-
-    va_end(args); // Закриваю список параметр?в
+    va_end( marker );
     return sum;
 }
 
-
 int main() {
-    int size=0;
-    double *arr = new double[10],number;   //Створюю масив, у якому буду зберiгати числа, якi введе користувач
-    cout << "Type numbers to sum and type 0 to stop:" << endl;
-    for (int i=0;true;i++) {
-        cin >> number;
-        if (number == 0) {
-            break;
-        }
-        arr[i]=number;
-        size++;
-    }
-
-    double sum = getsum(size,arr);
-    // передаю у функцiю розмiр масиву та числа, з якими буду працювати
-    // arr тут виступає аналогом n-ої кiлькостi чисел, якi ми паредаємо
-    // у всiх прикладах подiбнi функцiї передають фiксовану кiлькiсть аргументiв,
-    // а приймають один параметр - кiлькiсть аргументiв. Оскiльки в завданнi потрiбно
-    // передати N елементiв, я першим аргументом явно передаю розмiр масиву, а другим сам масив.
-    // Функцiя приймає першим параметром кiлькiсть аргументiв, а далi за допомогою макросу
-    // обробки змiнного числа параметрiв, я обраховую суму чисел.
-
-    cout << "Sum is: " <<sum;
-    delete[] arr;
+    double a, b, c, d, e;
+    INPUT_NUMBERS( a, b, c, d, e )
+    PRINT_SUM(getSum(5, a, b, c, d, e))
 }
