@@ -53,10 +53,10 @@ RM = "C:\Program Files\JetBrains\CLion 2021.2.1\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\User\Desktop\C\Laba12(C++)
+CMAKE_SOURCE_DIR = C:\Users\User\Desktop\C\cLabs\Laba12(C++)
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\User\Desktop\C\Laba12(C++)\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\User\Desktop\C\cLabs\Laba12(C++)\cmake-build-debug
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -80,14 +80,14 @@ clean: CMakeFiles/Laba12_C___.dir/clean
 CMakeFiles/Laba12_C___.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Laba12_C___.dir\build.make CMakeFiles/Laba12_C___.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Laba12_C___.dir\build.make CMakeFiles/Laba12_C___.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\User\Desktop\C\Laba12(C++)\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target Laba12_C___"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\User\Desktop\C\cLabs\Laba12(C++)\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target Laba12_C___"
 .PHONY : CMakeFiles/Laba12_C___.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Laba12_C___.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\User\Desktop\C\Laba12(C++)\cmake-build-debug\CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\User\Desktop\C\cLabs\Laba12(C++)\cmake-build-debug\CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/Laba12_C___.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\User\Desktop\C\Laba12(C++)\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\User\Desktop\C\cLabs\Laba12(C++)\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/Laba12_C___.dir/rule
 
 # Convenience name for target.

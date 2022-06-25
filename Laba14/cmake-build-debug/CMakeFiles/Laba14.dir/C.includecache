@@ -6,15 +6,15 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/User/Desktop/C/Laba14/main.c
+C:/Users/User/Desktop/C/cLabs/Laba14/main.c
 stdio.h
 -
 string.h
 -
 utility.h
-C:/Users/User/Desktop/C/Laba14/utility.h
+C:/Users/User/Desktop/C/cLabs/Laba14/utility.h
 
-C:/Users/User/Desktop/C/Laba14/utility.h
+C:/Users/User/Desktop/C/cLabs/Laba14/utility.h
 stdio.h
 -
 string.h

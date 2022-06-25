@@ -15,7 +15,7 @@ FILE *readBuffer;
 
 int main() {
     srand(time(NULL));
-    char fileName[8]={"F"},newFileName[8]={"G"};
+    char fileName[8]={"F.txt"},newFileName[8]={"G"};
     strcat(fileName,".txt");  // об'єдную два рядка, шлях до
     strcat(newFileName,".txt"); // файлу та його розширення
 

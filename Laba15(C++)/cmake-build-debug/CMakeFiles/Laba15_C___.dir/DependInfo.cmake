@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/User/Desktop/C/Laba15(C++)/main.cpp" "C:/Users/User/Desktop/C/Laba15(C++)/cmake-build-debug/CMakeFiles/Laba15_C___.dir/main.cpp.obj"
+  "C:/Users/User/Desktop/C/cLabs/Laba15(C++)/main.cpp" "C:/Users/User/Desktop/C/cLabs/Laba15(C++)/cmake-build-debug/CMakeFiles/Laba15_C___.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
